@@ -1,20 +1,12 @@
 name: CICD
 on: [push] #run this action in every push
-permissions:
-  contents: write
 jobs:
-  check-and-deploy:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
-        uses: actions/checkout@3
-      - name: Install and Run Check Script
+        uses: actions/checkout@v3
+      - name: Install an Run Check Script
         run: |
-          yarn install 
+          yarn install
           yarn prettier --check ./source
-      - name: Build
-        run: yarn build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: public
